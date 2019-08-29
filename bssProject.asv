@@ -129,9 +129,9 @@ global firstHigh secondHigh firstLow secondLow age;
 resultHigh = firstHigh - secondHigh,
 resultLow = firstLow - secondLow,
 A = resultHigh;
-B= unique(A);
-subplot(2, 2, 3);
-C = categorical(A,B,cellstr(num2str(B)));
+B= unique(A),
+subplot(2, 2, 3),
+C = categorical(A,B,cellstr(num2str(B))),
 histogram(C);
 subplot(2, 2, 4);
 D = resultLow;
@@ -298,25 +298,8 @@ ylim([0 110])
 % --------------------------------------------------------------------
 function pba_Callback(hObject, eventdata, handles)
 global firstHigh secondHigh firstLow secondLow age;
-subplot(3,2,3)
-plot(age, firstHigh, '.');
-xlim([15, 45])
-ylim([70, 160])
 
-subplot(3,2,4)
-plot(age, secondHigh, '.');
-xlim([15, 45])
-ylim([70, 160])
-
-subplot(3,2,5)
-plot(age, firstLow, '.');
-xlim([15, 45])
-ylim([40, 110])
-
-subplot(3,2,6)
-plot(age, secondLow, '.');
-xlim([15, 45])
-ylim([40, 110])
+fha = [firstHigh, a
 % hObject    handle to pba (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
