@@ -1,3 +1,4 @@
+
 function varargout = bssProject(varargin)
 % BSSPROJECT MATLAB code for bssProject.fig
 %      BSSPROJECT, by itself, creates a new BSSPROJECT or raises the existing
@@ -22,7 +23,7 @@ function varargout = bssProject(varargin)
 
 % Edit the above text to modify the response to help bssProject
 
-% Last Modified by GUIDE v2.5 28-Aug-2019 22:45:37
+% Last Modified by GUIDE v2.5 29-Aug-2019 16:31:57
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -42,7 +43,6 @@ else
     gui_mainfcn(gui_State, varargin{:});
 end
 % End initialization code - DO NOT EDIT
-
 
 % --- Executes just before bssProject is made visible.
 function bssProject_OpeningFcn(hObject, eventdata, handles, varargin)
@@ -95,25 +95,110 @@ function Open_Callback(hObject, eventdata, handles)
 %else
 %   disp(['User selected ', fullfile(path,file)]);
 %end
+global firstHigh secondHigh firstLow secondLow age;
 CSVData = csvread(file)
 firstRow = CSVData(1,1:4)
 pressureData = CSVData(2:end, 1:4)
 age = CSVData(2:end, 5)
+firstHigh = CSVData(2:end, 1)
+firstLow = CSVData(2:end, 2)
+secondHigh = CSVData(2:end, 3)
+secondLow = CSVData(2:end, 4)
+avgFirstHigh = mean(firstHigh)
+avgSecondHigh = mean(secondHigh)
+avgFirstLow = mean(firstLow)
+avgSecondLow = mean(secondLow)
+avg = mean(age);
+set(handles.text5, 'String', firstRow(1));
+set(handles.text6, 'String', firstRow(3));
+set(handles.text9, 'String', firstRow(2));
+set(handles.text10, 'String', firstRow(4));
+set(handles.text15, 'String', strcat(strcat(num2str(avgFirstHigh),'/'),num2str(avgFirstLow)));
+set(handles.text16, 'String', strcat(strcat(num2str(avgSecondHigh),'/'),num2str(avgSecondLow)));
+set(handles.text19, 'String', num2str(avg));
+
+%set(handles.editMaxRPM, 'Double', maxRPM);
 % hObject    handle to Open (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
 
 % --------------------------------------------------------------------
-function Untitled_1_Callback(hObject, eventdata, handles)
-% hObject    handle to Untitled_1 (see GCBO)
+function Pressure_dif_Callback(hObject, eventdata, handles)
+global firstHigh secondHigh firstLow secondLow age;
+resultHigh = firstHigh - secondHigh,
+resultLow = firstLow - secondLow,
+A = resultHigh;
+B= unique(A),
+subplot(2, 2, 3),
+C = categorical(A,B,cellstr(num2str(B))),
+histogram(C);
+subplot(2, 2, 4);
+D = resultLow;
+E= unique(D),
+F = categorical(D,E,cellstr(num2str(E)));
+histogram(F);
+
+
+%h = histogram(resultHigh)
+
+% hObject    handle to Pressure_dif (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
 
 % --------------------------------------------------------------------
-function Untitled_2_Callback(hObject, eventdata, handles)
-% hObject    handle to Untitled_2 (see GCBO)
+function meanbyage_Callback(hObject, eventdata, handles)
+global firstHigh secondHigh firstLow secondLow age;
+
+Mean1 = grpstats(firstHigh', age', {'mean'});
+subplot(3,2,3)
+bar( unique(age),Mean1)
+unAge = unique(age)
+for i=1:size(unique(age))
+    text(unAge(i),Mean1(i),num2str(Mean1(i),'%0.2f'),...
+               'HorizontalAlignment','center',...
+               'VerticalAlignment','bottom')
+end
+ylim([0 200])
+
+Mean2 = grpstats(firstLow', age', {'mean'});
+subplot(3,2,4)
+bar( unique(age),Mean2)
+unAge = unique(age)
+for i=1:size(unique(age))
+    text(unAge(i),Mean2(i),num2str(Mean2(i),'%0.2f'),...
+               'HorizontalAlignment','center',...
+               'VerticalAlignment','bottom')
+end
+ylim([0 200])
+
+Mean3 = grpstats(secondHigh', age', {'mean'});
+subplot(3,2,5)
+bar( unique(age),Mean3)
+unAge = unique(age)
+for i=1:size(unique(age))
+    text(unAge(i),Mean3(i),num2str(Mean3(i),'%0.2f'),...
+               'HorizontalAlignment','center',...
+               'VerticalAlignment','bottom')
+end
+ylim([0 200])
+
+Mean4 = grpstats(secondLow', age', {'mean'});
+subplot(3,2,6)
+bar( unique(age),Mean4)
+unAge = unique(age)
+for i=1:size(unique(age))
+    text(unAge(i),Mean4(i),num2str(Mean4(i),'%0.2f'),...
+               'HorizontalAlignment','center',...
+               'VerticalAlignment','bottom')
+end
+ylim([0 200])
+
+
+%text([min(age):max(age)], Mean1', num2str(Mean1'),'HorizontalAlignment','center','VerticalAlignment','bottom')
+
+% hObject    handle to meanbyage (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
