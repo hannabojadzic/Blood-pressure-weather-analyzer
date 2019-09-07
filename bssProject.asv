@@ -129,15 +129,21 @@ global firstHigh secondHigh firstLow secondLow age;
 resultHigh = firstHigh - secondHigh,
 resultLow = firstLow - secondLow,
 A = resultHigh;
-B= unique(A),
-subplot(2, 2, 3),
-C = categorical(A,B,cellstr(num2str(B))),
+B= unique(A);
+subplot(2, 2, 3);
+C = categorical(A,B,cellstr(num2str(B)));
 histogram(C);
+title('Razlike u gornjem pritisku');
+xlabel('Razlika pritisaka')
+ylabel('Broj ispitanika');
 subplot(2, 2, 4);
 D = resultLow;
 E= unique(D),
 F = categorical(D,E,cellstr(num2str(E)));
 histogram(F);
+title('Razlike u donjem pritisku');
+xlabel('Razlika pritisaka')
+ylabel('Broj ispitanika');
 
 
 %h = histogram(resultHigh)
@@ -154,6 +160,9 @@ global firstHigh secondHigh firstLow secondLow age;
 Mean1 = grpstats(firstHigh', age', {'mean'});
 subplot(3,2,3)
 bar( unique(age),Mean1)
+title('Gornji pritisak prvog mjerenja(avg)');
+xlabel('Godine')
+ylabel('Broj ispitanika');
 unAge = unique(age)
 for i=1:size(unique(age))
     text(unAge(i),Mean1(i),num2str(Mean1(i),'%0.2f'),...
@@ -298,8 +307,25 @@ ylim([0 110])
 % --------------------------------------------------------------------
 function pba_Callback(hObject, eventdata, handles)
 global firstHigh secondHigh firstLow secondLow age;
+subplot(3,2,3)
+plot(age, firstHigh, '.');
+xlim([15, 45])
+ylim([70, 160])
 
-fha = [firstHigh, a
+subplot(3,2,4)
+plot(age, secondHigh, '.');
+xlim([15, 45])
+ylim([70, 160])
+
+subplot(3,2,5)
+plot(age, firstLow, '.');
+xlim([15, 45])
+ylim([40, 110])
+
+subplot(3,2,6)
+plot(age, secondLow, '.');
+xlim([15, 45])
+ylim([40, 110])
 % hObject    handle to pba (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
