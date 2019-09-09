@@ -281,8 +281,9 @@ global firstHigh secondHigh firstLow secondLow age;
 A = firstHigh;
 B= unique(A);
 C = categorical(A,B,cellstr(num2str(B)));
+
 subplot(3,2,3)
-histogram(C);
+histogram(firstHigh);
 title('Rezultati gornjeg pritiska prvog mjerenja');
 xlabel('Rezultat mjerenja')
 ylabel('Broj ispitanika');
