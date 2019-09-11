@@ -2,7 +2,8 @@
 
 <br/>
 
-
+![alt text](https://raw.githubusercontent.com/hannabojadzic/Blood-pressure-weather-analyzer/master/bss1.JPG)
+![alt text](https://raw.githubusercontent.com/hannabojadzic/Blood-pressure-weather-analyzer/master/bss2.JPG)
 ![alt text](https://raw.githubusercontent.com/hannabojadzic/Blood-pressure-weather-analyzer/master/pritisakPoGodinama.JPG)
 ![alt text](https://raw.githubusercontent.com/hannabojadzic/Blood-pressure-weather-analyzer/master/prosjecnaRazlikaPoGodinama.JPG)
 ![alt text](https://raw.githubusercontent.com/hannabojadzic/Blood-pressure-weather-analyzer/master/prosjekPoGodinama.JPG)
